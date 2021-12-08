@@ -33,15 +33,15 @@ class Emitter {
   emit(name: string, ...args: EmitterArgs) {
     if (!this.cache[name]) return
 
-    this.cache[name]?.forEach((callback) => {
-      callback?.(args)
-    })
+    for (const callback of this.cache[name] as EmitterCallback[]) {
+      callback(args)
+    }
   }
 
   off(name: string, callback: EmitterCallback) {
     if (!this.cache[name]) return
     const newCache = []
-    for(const item of this.cache[name] as EmitterCallback[]) {
+    for (const item of this.cache[name] as EmitterCallback[]) {
       if (item === callback || item._ === callback) continue
       item && newCache.push(item)
     }

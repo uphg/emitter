@@ -9,8 +9,8 @@ const onFun = (value: string) => {
   console.log(`emit: ${value}`)
 }
 
-eventBus.once(eventName1, onFun)
 eventBus.on(eventName1, onFun)
+eventBus.once(eventName1, onFun)
 
 eventBus.emit(eventName1, 'hi')
 eventBus.emit(eventName1, 'hello')
