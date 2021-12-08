@@ -1,0 +1,22 @@
+{
+  "name": "emitter",
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build && sh scripts/build.sh",
+    "preview": "vite preview",
+    "test": "jest"
+  },
+  "devDependencies": {
+    "@babel/preset-env": "^7.16.4",
+    "@babel/preset-typescript": "^7.16.0",
+    "@rollup/plugin-typescript": "^8.3.0",
+    "@types/jest": "^27.0.3",
+    "jest": "^27.4.3",
+    "rollup-plugin-esbuild": "^4.7.2",
+    "rollup-plugin-terser": "^7.0.2",
+    "tslib": "^2.3.1",
+    "typescript": "^4.4.4",
+    "vite": "^2.7.0"
+  }
+}
