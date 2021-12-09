@@ -1,6 +1,6 @@
 {
   "name": "@uphg/emitter",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "license": "MIT",
   "author": "Lv Heng",
   "description": "A small event emitter library",
