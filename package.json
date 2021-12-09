@@ -4,6 +4,11 @@
   "license": "MIT",
   "author": "Lv Heng",
   "description": "A small event emitter library",
+  "keywords": [
+    "event",
+    "emitter",
+    "eventbus"
+  ],
   "files": [
     "dist"
   ],
