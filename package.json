@@ -1,11 +1,34 @@
 {
-  "name": "emitter",
-  "version": "0.0.0",
+  "name": "@uphg/emitter",
+  "version": "0.0.1",
+  "license": "MIT",
+  "author": "Lv Heng",
+  "description": "A small event emitter library",
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/index.umd.js",
+  "module": "./dist/index.es.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.es.js",
+      "require": "./dist/index.umd.js"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/uphg/emitter.git"
+  },
+  "bugs": {
+    "url": "https://github.com/uphg/emitter/issues"
+  },
+  "homepage": "https://github.com/uphg/emitter#readme",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build && sh scripts/build.sh",
     "preview": "vite preview",
-    "test": "jest"
+    "test": "jest --watchAll"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.16.4",

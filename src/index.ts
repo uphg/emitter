@@ -10,7 +10,7 @@ interface EmitterCache {
 }
 
 class Emitter {
-  private cache: EmitterCache = {}
+  cache: EmitterCache = {}
   on(name: string, callback: EmitterCallback) {
     if (!this.cache[name]) {
       this.cache[name] = [callback]
@@ -34,16 +34,19 @@ class Emitter {
     if (!this.cache[name]) return
 
     for (const callback of this.cache[name] as EmitterCallback[]) {
-      callback(args)
+      callback(...args)
     }
   }
 
-  off(name: string, callback: EmitterCallback) {
+  off(name: string, callback?: EmitterCallback) {
     if (!this.cache[name]) return
     const newCache = []
-    for (const item of this.cache[name] as EmitterCallback[]) {
-      if (item === callback || item._ === callback) continue
-      item && newCache.push(item)
+
+    if (this.cache[name] && callback) {
+      for (const item of this.cache[name] as EmitterCallback[]) {
+        if (item === callback || item._ === callback) continue
+        item && newCache.push(item)
+      }
     }
 
     // 防止内存泄漏

@@ -3,6 +3,8 @@ import Emitter from "./index"
 console.log('# eventBus')
 const eventBus = new Emitter()
 
+console.log(eventBus)
+
 const eventName1 = 'update-demo1'
 
 const onFun = (value: string) => {
