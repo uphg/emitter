@@ -1,17 +1,32 @@
 # Emitter
 
-实现一个轻量的 event emitter 库。
+A small event emitter library.
 
-## 基本用法
+## Usage
 
 ```js
 import Emitter from '@/uphg/emitter'
 const emitter = new Emitter();
 
+// subscribe to events
 emitter.on('foo', function (p1, p2, p3) {
  // ...
 });
 
+// subscribe the event only once
+emitter.once('foo', function (p1, p2, p3) {
+ // ...
+});
+
+// publish events
 emitter.emit('foo', 'p1', 'p2', 'p3');
+
+// clearing all events
+emitter.clear()
+
+// use reference functions
+function fn() {}
+emitter.on('foo', fn)
+emitter.off('foo', fn)
 ```
 

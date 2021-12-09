@@ -25,7 +25,7 @@ class Emitter {
       callback(...args);
     }
 
-    // 记录原函数，在执行 off 时清除（on/once 同时清除）
+    // record the original function
     listener._ = callback
     return this.on(name, listener)
   }
@@ -49,7 +49,7 @@ class Emitter {
       }
     }
 
-    // 防止内存泄漏
+    // prevent memory leaks
     (this.cache[name]?.length)
     ? this.cache[name] = newCache
     : delete this.cache[name]

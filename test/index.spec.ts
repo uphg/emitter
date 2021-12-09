@@ -1,13 +1,31 @@
 import Emitter from '../src/index'
 
-test('订阅一个事件', () => {
+test('Emitter is a function', () => {
+  expect(Emitter).toBeInstanceOf(Function)
+})
+
+test('inherited the Emitter instance', () => {
+  const emitter = new Emitter()
+  expect(emitter).toBeInstanceOf(Emitter)
+})
+
+test('Objects include on, once, emit, off, and clear methods', () => {
+  const eventBus = new Emitter()
+  expect(eventBus.on).toBeInstanceOf(Function)
+  expect(eventBus.once).toBeInstanceOf(Function)
+  expect(eventBus.emit).toBeInstanceOf(Function)
+  expect(eventBus.off).toBeInstanceOf(Function)
+  expect(eventBus.clear).toBeInstanceOf(Function)
+})
+
+test('subscribe to an event', () => {
   const emitter = new Emitter()
   const fn = () => {}
   emitter.on('test', fn)
   expect(emitter.cache['test']).toEqual([fn])
 })
 
-test('触发一个事件', (done) => {
+test('publish to an event', (done) => {
   const emitter = new Emitter()
   emitter.on('test', () => {
     done()
@@ -15,7 +33,7 @@ test('触发一个事件', (done) => {
   emitter.emit('test')
 })
 
-test('只触发一次事件', (done) => {
+test('subscribe the event only once', (done) => {
   const emitter = new Emitter()
   emitter.once('test', () => {
     expect(emitter.cache.test).toEqual([])
@@ -25,7 +43,7 @@ test('只触发一次事件', (done) => {
   emitter.emit('test')
 })
 
-test('可以传入多个参数', (done) => {
+test('pass in multiple parameters', (done) => {
   const emitter = new Emitter()
   emitter.on('test', (p1, p2) => {
     expect(p1).toBe('hi')
@@ -35,7 +53,7 @@ test('可以传入多个参数', (done) => {
   emitter.emit('test', 'hi', 'hello')
 })
 
-test('可以多次触发事件', () => {
+test('trigger event multiple times', () => {
   const emitter = new Emitter()
   const mockFn = jest.fn(() => {})
   emitter.on('test', mockFn)
@@ -45,7 +63,7 @@ test('可以多次触发事件', () => {
   expect(mockFn.mock.calls.length).toBe(3);
 })
 
-test('取消订阅的所有指定事件', () => {
+test('unsubscribe all specified events', () => {
   const emitter = new Emitter()
   const mockFn1 = jest.fn(() => {})
   const mockFn2 = jest.fn(() => {})
@@ -58,7 +76,7 @@ test('取消订阅的所有指定事件', () => {
   expect(mockFn2.mock.calls.length).toBe(0);
 })
 
-test('取消订阅的指定函数', () => {
+test('the specified function for unsubscribing', () => {
   const emitter = new Emitter()
   const mockFn1 = jest.fn(() => {})
   const mockFn2 = jest.fn(() => {})
@@ -70,7 +88,7 @@ test('取消订阅的指定函数', () => {
   expect(mockFn2.mock.calls.length).toBe(1);
 })
 
-test('取消多次订阅的指定函数', () => {
+test('cancel the specified function of multiple subscriptions', () => {
   const emitter = new Emitter()
   const mockFn1 = jest.fn(() => {})
   const mockFn2 = jest.fn(() => {})
@@ -83,7 +101,7 @@ test('取消多次订阅的指定函数', () => {
   expect(mockFn2.mock.calls.length).toBe(1);
 })
 
-test('订阅的事件被调用时可以删除自身', (done) => {
+test('you can delete itself when the subscribed event is called', (done) => {
   const emitter = new Emitter()
   emitter.on('test', () => {
     expect(emitter.cache['test'].length).toBe(1)
@@ -94,7 +112,7 @@ test('订阅的事件被调用时可以删除自身', (done) => {
   emitter.emit('test')
 })
 
-test('即使在事件回调中取消订阅该函数，该函数也会执行', () => {
+test('unsubscribe will also be executed', () => {
   const emitter = new Emitter()
   const mockFn = jest.fn(() => {
     emitter.off('test', mockFn)
@@ -104,41 +122,23 @@ test('即使在事件回调中取消订阅该函数，该函数也会执行', ()
   expect(mockFn.mock.calls.length).toBe(1)
 })
 
-test('添加事件之前取消事件什么都不做', (done) => {
+test('cancel before adding event, do nothing', (done) => {
   const emitter = new Emitter()
   emitter.off('test', () => {})
   done()
 })
 
-test('发布没有订阅的事件', (done) => {
+test('publish events that are not subscribed', (done) => {
   const emitter = new Emitter()
   emitter.emit('test', 'hi')
   done()
 })
 
-test('取消只订阅一次的事件', () => {
+test('cancel an event that is only subscribed once', () => {
   const emitter = new Emitter()
   const mockFn = jest.fn(() => {})
   emitter.once('test', mockFn)
   emitter.off('test', mockFn)
   emitter.emit('test')
   expect(mockFn.mock.calls.length).toBe(0)
-})
-
-test('Emitter 是一个函数', () => {
-  expect(Emitter).toBeInstanceOf(Function)
-})
-
-test('使用 Emitter 构造的对象继承了 Emitter 实例', () => {
-  const emitter = new Emitter()
-  expect(emitter).toBeInstanceOf(Emitter)
-})
-
-test('使用 Emitter 构造的对象应包括 on、once、emit、off、clear 方法', () => {
-  const eventBus = new Emitter()
-  expect(eventBus.on).toBeInstanceOf(Function)
-  expect(eventBus.once).toBeInstanceOf(Function)
-  expect(eventBus.emit).toBeInstanceOf(Function)
-  expect(eventBus.off).toBeInstanceOf(Function)
-  expect(eventBus.clear).toBeInstanceOf(Function)
 })
