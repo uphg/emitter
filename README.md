@@ -116,7 +116,7 @@ emitter.off('foo', fn)
 
 ### `clear()`
 
-Calling this method will clear all events
+- Calling this method will clear all events
 
 - **Example**
 
