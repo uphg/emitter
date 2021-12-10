@@ -1,6 +1,6 @@
 {
   "name": "small-emitter",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "license": "MIT",
   "author": "Lv Heng",
   "description": "A small event emitter library",
