@@ -22,7 +22,7 @@ test('subscribe to an event', () => {
   const emitter = new Emitter()
   const fn = () => {}
   emitter.on('test', fn)
-  expect(emitter.cache['test']).toEqual([fn])
+  expect(emitter.events['test']).toEqual([fn])
 })
 
 test('publish to an event', (done) => {
@@ -36,7 +36,7 @@ test('publish to an event', (done) => {
 test('subscribe the event only once', (done) => {
   const emitter = new Emitter()
   emitter.once('test', () => {
-    expect(emitter.cache.test).toEqual([])
+    expect(emitter.events.test).toEqual([])
     done()
   })
   emitter.emit('test')
@@ -104,9 +104,9 @@ test('cancel the specified function of multiple subscriptions', () => {
 test('you can delete itself when the subscribed event is called', (done) => {
   const emitter = new Emitter()
   emitter.on('test', () => {
-    expect(emitter.cache['test'].length).toBe(1)
+    expect(emitter.events['test'].length).toBe(1)
     emitter.off('test')
-    expect(emitter.cache['test'].length).toBe(0)
+    expect(emitter.events['test'].length).toBe(0)
     done()
   })
   emitter.emit('test')

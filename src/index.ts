@@ -10,13 +10,14 @@ interface EmitterCache {
 }
 
 class Emitter {
-  cache: EmitterCache = {}
+  public events: EmitterCache = {}
   on(name: string, callback: EmitterCallback) {
-    if (!this.cache[name]) {
-      this.cache[name] = [callback]
+    const e = this.events
+    if (!e[name]) {
+      e[name] = [callback]
       return
     }
-    this.cache[name]?.push(callback)
+    e[name]?.push(callback)
   }
 
   once(name: string, callback: EmitterCallback) {
@@ -31,32 +32,34 @@ class Emitter {
   }
 
   emit(name: string, ...args: EmitterArgs) {
-    if (!this.cache[name]) return
+    const e = this.events
+    if (!e[name]) return
 
-    for (const callback of this.cache[name] as EmitterCallback[]) {
+    for (const callback of e[name] as EmitterCallback[]) {
       callback(...args)
     }
   }
 
   off(name: string, callback?: EmitterCallback) {
-    if (!this.cache[name]) return
+    const e = this.events
+    if (!e[name]) return
     const newCache = []
 
-    if (this.cache[name] && callback) {
-      for (const item of this.cache[name] as EmitterCallback[]) {
+    if (e[name] && callback) {
+      for (const item of e[name] as EmitterCallback[]) {
         if (item === callback || item._ === callback) continue
         item && newCache.push(item)
       }
     }
 
     // prevent memory leaks
-    (this.cache[name]?.length)
-    ? this.cache[name] = newCache
-    : delete this.cache[name]
+    (e[name]?.length)
+    ? e[name] = newCache
+    : delete e[name]
   }
 
   clear() {
-    this.cache = {}
+    this.events = {}
   }
 }
 
