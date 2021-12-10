@@ -7,7 +7,7 @@ A small event emitter library.
 ## Usage
 
 ```js
-import Emitter from 'tulp-emitter'
+import Emitter from 'small-emitter'
 const emitter = new Emitter();
 
 // subscribe to events

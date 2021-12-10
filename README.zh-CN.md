@@ -7,7 +7,7 @@
 ## 用法
 
 ```js
-import Emitter from 'tulp-emitter'
+import Emitter from 'small-emitter'
 const emitter = new Emitter();
 
 // 订阅事件
