@@ -5,12 +5,12 @@ interface EmitterCallback {
   _?: () => void
 }
 
-interface EmitterCache {
+interface EmitterEvents {
   [key: string]: EmitterCallback[] | null
 }
 
 class Emitter {
-  public events: EmitterCache = {}
+  public events: EmitterEvents = {}
   on(name: string, callback: EmitterCallback) {
     const e = this.events
     if (!e[name]) {
