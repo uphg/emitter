@@ -44,9 +44,7 @@ class Emitter {
     }
 
     // prevent memory leaks
-    (e[name]?.length)
-    ? e[name] = newCache
-    : delete e[name]
+    (e[name]?.length) ? e[name] = newCache : delete e[name]
   }
 
   clear() {
