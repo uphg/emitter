@@ -1,27 +1,18 @@
-type EmitterArgs = any[]
-
 interface EmitterCallback {
-  (...args: EmitterArgs): void
-  _?: () => void
-}
-
-interface EmitterEvents {
-  [key: string]: EmitterCallback[] | null
+  (...args: unknown[]): unknown
+  _?: (...args: unknown[]) => unknown
 }
 
 class Emitter {
-  public events: EmitterEvents = {}
+  public events: { [key: string]: EmitterCallback[] } = {}
   on(name: string, callback: EmitterCallback) {
     const e = this.events
-    if (!e[name]) {
-      e[name] = [callback]
-      return
-    }
+    e[name] = e[name] || []
     e[name]?.push(callback)
   }
 
   once(name: string, callback: EmitterCallback) {
-    const listener = (...args: EmitterArgs) => {
+    const listener = (...args: unknown[]) => {
       this.off(name, listener);
       callback(...args);
     }
@@ -31,7 +22,7 @@ class Emitter {
     return this.on(name, listener)
   }
 
-  emit(name: string, ...args: EmitterArgs) {
+  emit(name: string, ...args: unknown[]) {
     const e = this.events
     if (!e[name]) return
 
@@ -53,9 +44,7 @@ class Emitter {
     }
 
     // prevent memory leaks
-    (e[name]?.length)
-    ? e[name] = newCache
-    : delete e[name]
+    (e[name]?.length) ? e[name] = newCache : delete e[name]
   }
 
   clear() {

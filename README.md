@@ -158,3 +158,7 @@ emitter.off('foo', fn)
   emitter.emit('foo', 'hi, Jack') // Not output
   emitter.emit('bar', 'hi, Tom') // Not output
   ```
+
+## License
+
+[MIT License](https://opensource.org/licenses/MIT)

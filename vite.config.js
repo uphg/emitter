@@ -6,7 +6,7 @@ module.exports = defineConfig({
     lib: {
       entry: path.resolve(__dirname, 'src/index.ts'),
       name: 'emitter',
-      formats: ['umd'], // default：['es', 'umd']
+      formats: ['es', 'umd'], // default：['es', 'umd']
       fileName: (format) => `index.${format}.js`
     }
   }
