@@ -55,109 +55,109 @@ emitter.off('foo', fn)
 
 ### `on(name: string, callback: () => void)`
 
-- **Arguments**
+**Arguments**
 
-  - `name` name of the event
-  - `callback` event's callback function
+- `name` name of the event
+- `callback` event's callback function
 
-- **Example**
+**Example**
 
-  ```js
-  const emitter = new Emitter()
+```js
+const emitter = new Emitter()
 
-  emitter.on('foo', (data) => {
-    console.log(data)
-  })
+emitter.on('foo', (data) => {
+  console.log(data)
+})
 
-  emitter.emit('foo', 1) // 1
-  emitter.emit('foo', 2) // 2
-  ```
+emitter.emit('foo', 1) // 1
+emitter.emit('foo', 2) // 2
+```
 
 ### `once(name: string, callback: () => void)`
 
-- **Arguments**
+**Arguments**
 
-  - `name` name of the event
-  - `callback` event's callback function
+- `name` name of the event
+- `callback` event's callback function
 
-- **Example**
+**Example**
 
-  ```js
-  const emitter = new Emitter()
+```js
+const emitter = new Emitter()
 
-  emitter.once('foo', (data) => {
-    // The function will only be executed once
-    console.log(data)
-  })
+emitter.once('foo', (data) => {
+  // The function will only be executed once
+  console.log(data)
+})
 
-  emitter.emit('foo', 'a') // 'a'
-  emitter.emit('foo', 'b') // Not output
-  ```
+emitter.emit('foo', 'a') // 'a'
+emitter.emit('foo', 'b') // Not output
+```
 
 ### `emit(name: string, ...args: any[])`
 
-- **Arguments**
+**Arguments**
 
-  - `name` name of the event
-  - `...args (optional)` parameters passed in by the execution event
+- `name` name of the event
+- `...args (optional)` parameters passed in by the execution event
 
-- **Example**
+**Example**
 
-  ```js
-  const emitter = new Emitter()
+```js
+const emitter = new Emitter()
 
-  emitter.once('bar', (message, name) => {
-    console.log(`${message}, ${name}`)
-  })
+emitter.once('bar', (message, name) => {
+  console.log(`${message}, ${name}`)
+})
 
-  emitter.emit('bar', 'hi', 'Jack') // hi, Jack
-  ```
+emitter.emit('bar', 'hi', 'Jack') // hi, Jack
+```
 
 ### `off(name: string, callback?: () => void)`
 
-- **Arguments**
+**Arguments**
 
-  - `name` name of the event
-  - `callback (optional)` functions that need to be cleared or function reference
+- `name` name of the event
+- `callback (optional)` functions that need to be cleared or function reference
 
-- **Example**
+**Example**
 
-  ```js
-  const emitter = new Emitter()
+```js
+const emitter = new Emitter()
 
-  const fn = (message) => {
-    console.log(message)
-  }
+const fn = (message) => {
+  console.log(message)
+}
 
-  emitter.on('bar', fn)
-  emitter.emit('bar', 'hi') // hi
-  emitter.off('bar', fn)
-  emitter.emit('bar', 'Jack') // Not output
-  ```
+emitter.on('bar', fn)
+emitter.emit('bar', 'hi') // hi
+emitter.off('bar', fn)
+emitter.emit('bar', 'Jack') // Not output
+```
 
 ### `clear()`
 
-- Calling this method will clear all events
+Calling this method will clear all events
 
-- **Example**
+**Example**
 
-  ```js
-  const emitter = new Emitter()
+```js
+const emitter = new Emitter()
 
-  emitter.on('foo', (value) => {
-    console.log(value)
-  })
+emitter.on('foo', (value) => {
+  console.log(value)
+})
 
-  emitter.on('bar', (value) => {
-    console.log(value)
-  })
+emitter.on('bar', (value) => {
+  console.log(value)
+})
 
-  emitter.emit('foo', 'hi, foo')
-  emitter.emit('bar', 'hi, bar') // hi, bar
-  emitter.clear()
-  emitter.emit('foo', 'hi, Jack') // Not output
-  emitter.emit('bar', 'hi, Tom') // Not output
-  ```
+emitter.emit('foo', 'hi, foo')
+emitter.emit('bar', 'hi, bar') // hi, bar
+emitter.clear()
+emitter.emit('foo', 'hi, Jack') // Not output
+emitter.emit('bar', 'hi, Tom') // Not output
+```
 
 ## License
 
