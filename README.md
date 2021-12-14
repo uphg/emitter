@@ -4,6 +4,25 @@
 
 A small event emitter library.
 
+## Install
+
+Install with npm
+
+```sh
+npm i small-emitter
+# or yarn add small-emitter
+```
+
+Import in the project
+
+```js
+// ES6 modules
+import Emitter from 'small-emitter'
+
+// CommonJS modules
+const Emitter = require('small-emitter')
+```
+
 ## Usage
 
 ```js

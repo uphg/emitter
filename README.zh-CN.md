@@ -4,6 +4,25 @@
 
 一个很小的 event emitter 库。
 
+## 安装
+
+使用 npm 安装
+
+```sh
+npm i small-emitter
+# or yarn add small-emitter
+```
+
+在项目中导入
+
+```js
+// ES6 modules
+import Emitter from 'small-emitter'
+
+// CommonJS modules
+const Emitter = require('small-emitter')
+```
+
 ## 用法
 
 ```js
