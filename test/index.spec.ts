@@ -1,6 +1,7 @@
 import Emitter from '../src/index'
 
 test('Emitter is a function', () => {
+  expect(typeof Emitter === 'function').toBe(true)
   expect(Emitter).toBeInstanceOf(Function)
 })
 
@@ -11,11 +12,11 @@ test('inherited the Emitter instance', () => {
 
 test('Objects include on, once, emit, off, and clear methods', () => {
   const eventBus = new Emitter()
-  expect(eventBus.on).toBeInstanceOf(Function)
-  expect(eventBus.once).toBeInstanceOf(Function)
-  expect(eventBus.emit).toBeInstanceOf(Function)
-  expect(eventBus.off).toBeInstanceOf(Function)
-  expect(eventBus.clear).toBeInstanceOf(Function)
+  expect(typeof eventBus.on === 'function').toBe(true)
+  expect(typeof eventBus.once === 'function').toBe(true)
+  expect(typeof eventBus.emit === 'function').toBe(true)
+  expect(typeof eventBus.off === 'function').toBe(true)
+  expect(typeof eventBus.clear === 'function').toBe(true)
 })
 
 test('subscribe to an event', () => {
