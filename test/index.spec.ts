@@ -2,7 +2,6 @@ import Emitter from '../src/index'
 
 test('Emitter is a function', () => {
   expect(typeof Emitter === 'function').toBe(true)
-  expect(Emitter).toBeInstanceOf(Function)
 })
 
 test('inherited the Emitter instance', () => {
