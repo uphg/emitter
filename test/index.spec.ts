@@ -142,3 +142,13 @@ test('cancel an event that is only subscribed once', () => {
   emitter.emit('test')
   expect(mockFn.mock.calls.length).toBe(0)
 })
+
+test('on is used together with once', () => {
+  const emitter = new Emitter()
+  const mockFn = jest.fn(() => {})
+  emitter.once('test', mockFn)
+  emitter.on('test', mockFn)
+  emitter.off('test', mockFn)
+  emitter.emit('test')
+  expect(mockFn.mock.calls.length).toBe(0)
+})
