@@ -26,25 +26,25 @@ export class Emitter {
     const e = this.events
     if (!e[name]) return
 
-    for (const callback of e[name] as EmitterCallback[]) {
+    for (const callback of e[name]) {
       callback(...args)
     }
   }
 
   off(name: string, callback?: EmitterCallback) {
     const e = this.events
-    if (!e[name]) return
-    const newCache = []
-
-    if (e[name] && callback) {
-      for (const item of e[name] as EmitterCallback[]) {
+    if (!e[name]?.length) return
+    
+    if (callback) {
+      const newCache = []
+      for (const item of e[name]) {
         if (item === callback || item._ === callback) continue
         item && newCache.push(item)
       }
+      e[name] = newCache
+    } else {
+      delete e[name]
     }
-
-    // prevent memory leaks
-    (e[name]?.length) ? e[name] = newCache : delete e[name]
   }
 
   clear() {
