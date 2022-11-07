@@ -3,7 +3,7 @@ interface EmitterCallback {
   _?: (...args: unknown[]) => unknown
 }
 
-class Emitter {
+export class Emitter {
   public events: { [key: string]: EmitterCallback[] } = {}
   on(name: string, callback: EmitterCallback) {
     const e = this.events
@@ -51,5 +51,7 @@ class Emitter {
     this.events = {}
   }
 }
+
+export const useEmitter = () => new Emitter()
 
 export default Emitter
