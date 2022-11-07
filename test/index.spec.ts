@@ -33,14 +33,13 @@ test('publish to an event', (done) => {
   emitter.emit('test')
 })
 
-test('subscribe the event only once', (done) => {
+test('subscribe the event only once', () => {
   const emitter = new Emitter()
-  emitter.once('test', () => {
-    expect(emitter.events.test).toEqual([])
-    done()
-  })
+  const fn = jest.fn(() => {})
+  emitter.once('test', fn)
   emitter.emit('test')
   emitter.emit('test')
+  expect(fn.mock.calls.length).toBe(1);
 })
 
 test('pass in multiple parameters', (done) => {
@@ -65,15 +64,15 @@ test('trigger event multiple times', () => {
 
 test('unsubscribe all specified events', () => {
   const emitter = new Emitter()
-  const mockFn1 = jest.fn(() => {})
-  const mockFn2 = jest.fn(() => {})
-  emitter.on('test', mockFn1)
-  emitter.on('test', mockFn2)
+  const fn1 = jest.fn(() => {})
+  const fn2 = jest.fn(() => {})
+  emitter.on('test', fn1)
+  emitter.on('test', fn2)
   emitter.off('test')
   emitter.emit('test')
   emitter.emit('test')
-  expect(mockFn1.mock.calls.length).toBe(0);
-  expect(mockFn2.mock.calls.length).toBe(0);
+  expect(fn1.mock.calls.length).toBe(0);
+  expect(fn2.mock.calls.length).toBe(0);
 })
 
 test('the specified function for unsubscribing', () => {
@@ -106,7 +105,7 @@ test('you can delete itself when the subscribed event is called', (done) => {
   emitter.on('test', () => {
     expect(emitter.events['test'].length).toBe(1)
     emitter.off('test')
-    expect(emitter.events['test'].length).toBe(0)
+    expect(emitter.events['test']).toBeUndefined()
     done()
   })
   emitter.emit('test')
