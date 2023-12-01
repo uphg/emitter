@@ -1,4 +1,4 @@
-import Emitter from '../src/index'
+import { Emitter } from '../src/index'
 
 test('Emitter is a function', () => {
   expect(typeof Emitter === 'function').toBe(true)
