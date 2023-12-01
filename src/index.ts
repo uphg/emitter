@@ -1,17 +1,12 @@
-interface EmitterCallback {
-  (...args: unknown[]): unknown
-  _?: (...args: unknown[]) => unknown
-}
-
 export class Emitter {
-  public events: { [key: string]: EmitterCallback[] } = {}
-  on(name: string, callback: EmitterCallback) {
+  public events: { [key: string]: Function[] } = {}
+  on<T extends Function>(name: string, callback: T) {
     const e = this.events
     e[name] = e[name] || []
     e[name]?.push(callback)
   }
 
-  once(name: string, callback: EmitterCallback) {
+  once<T extends Function>(name: string, callback: T) {
     const listener = (...args: unknown[]) => {
       this.off(name, listener);
       callback(...args);
@@ -22,7 +17,7 @@ export class Emitter {
     return this.on(name, listener)
   }
 
-  emit(name: string, ...args: unknown[]) {
+  emit<T extends unknown[]>(name: string, ...args: T) {
     const e = this.events
     if (!e[name]) return
 
@@ -31,14 +26,14 @@ export class Emitter {
     }
   }
 
-  off(name: string, callback?: EmitterCallback) {
+  off<T extends Function>(name: string, callback?: T) {
     const e = this.events
     if (!e[name]?.length) return
     
     if (callback) {
       const newCache = []
       for (const item of e[name]) {
-        if (item === callback || item._ === callback) continue
+        if (item === callback || (item as unknown as { _: Function })._ === callback) continue
         item && newCache.push(item)
       }
       e[name] = newCache
@@ -53,5 +48,3 @@ export class Emitter {
 }
 
 export const useEmitter = () => new Emitter()
-
-export default Emitter
