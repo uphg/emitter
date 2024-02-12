@@ -53,7 +53,7 @@ emitter.off('foo', fn)
 
 ## API
 
-### `on(name: string, callback: () => void)`
+### `on<T extends Function>(name: string, callback: T)`
 
 **参数**
 
@@ -73,7 +73,7 @@ emitter.emit('foo', 1) // 1
 emitter.emit('foo', 2) // 2
 ```
 
-### `once(name: string, callback: () => void)`
+### `once<T extends Function>(name: string, callback: T)`
 
 **参数**
 
@@ -94,7 +94,7 @@ emitter.emit('foo', 'a') // 'a'
 emitter.emit('foo', 'b') // Not output
 ```
 
-### `emit(name: string, ...args: any[])`
+### `emit<T extends unknown[]>(name: string, ...args: T)`
 
 **参数**
 
@@ -113,7 +113,7 @@ emitter.once('bar', (message, name) => {
 emitter.emit('bar', 'hi', 'Jack') // hi, Jack
 ```
 
-### `off(name: string, callback?: () => void)`
+### `off<T extends Function>(name: string, callback?: T)`
 
 **参数**
 
