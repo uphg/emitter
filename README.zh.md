@@ -1,51 +1,51 @@
 # Emitter
 
-[简体中文](./README.md) | English
+[English](./README.md) | 简体中文
 
-A small event emitter library.
+一个很小的 event emitter 库。
 
-## Install
+## 安装
 
-Install with npm
+使用 npm 安装
 
 ```sh
 npm i small-emitter
-# or yarn add small-emitter
+# or pnpm add small-emitter
 ```
 
-Import in the project
+在项目中导入
 
 ```js
 // ES6 modules
-import Emitter from 'small-emitter'
+import { Emitter } from 'small-emitter'
 
 // CommonJS modules
-const Emitter = require('small-emitter')
+const { Emitter } = require('small-emitter')
 ```
 
-## Usage
+## 用法
 
 ```js
-import Emitter from 'small-emitter'
+import { Emitter } from 'small-emitter'
 const emitter = new Emitter();
 
-// subscribe to events
+// 订阅事件
 emitter.on('foo', function (p1, p2, p3) {
  // ...
 });
 
-// subscribe the event only once
+// 只订阅一次事件
 emitter.once('foo', function (p1, p2, p3) {
  // ...
 });
 
-// publish events
+// 发布事件
 emitter.emit('foo', 'p1', 'p2', 'p3');
 
-// clearing all events
+// 清空所有事件
 emitter.clear()
 
-// use reference functions
+// 使用函数引用
 function fn() {}
 emitter.on('foo', fn)
 emitter.off('foo', fn)
@@ -55,12 +55,12 @@ emitter.off('foo', fn)
 
 ### `on(name: string, callback: () => void)`
 
-**Arguments**
+**参数**
 
-- `name` name of the event
-- `callback` event's callback function
+- `name` 事件名
+- `callback` 事件的回调函数
 
-**Example**
+**示例**
 
 ```js
 const emitter = new Emitter()
@@ -75,18 +75,18 @@ emitter.emit('foo', 2) // 2
 
 ### `once(name: string, callback: () => void)`
 
-**Arguments**
+**参数**
 
-- `name` name of the event
-- `callback` event's callback function
+- `name` 事件名
+- `callback` 事件的回调函数
 
-**Example**
+**示例**
 
 ```js
 const emitter = new Emitter()
 
 emitter.once('foo', (data) => {
-  // The function will only be executed once
+  // 这个函数只会执行一次
   console.log(data)
 })
 
@@ -96,12 +96,12 @@ emitter.emit('foo', 'b') // Not output
 
 ### `emit(name: string, ...args: any[])`
 
-**Arguments**
+**参数**
 
-- `name` name of the event
-- `...args (optional)` parameters passed in by the execution event
+- `name` 事件名
+- `...args (optional)` 执行事件时传入的参数
 
-**Example**
+**示例**
 
 ```js
 const emitter = new Emitter()
@@ -115,12 +115,12 @@ emitter.emit('bar', 'hi', 'Jack') // hi, Jack
 
 ### `off(name: string, callback?: () => void)`
 
-**Arguments**
+**参数**
 
-- `name` name of the event
-- `callback (optional)` functions that need to be cleared or function reference
+- `name` 事件名
+- `callback (optional)` 需要清除的函数或函数引用
 
-**Example**
+**示例**
 
 ```js
 const emitter = new Emitter()
@@ -137,9 +137,9 @@ emitter.emit('bar', 'Jack') // Not output
 
 ### `clear()`
 
-Calling this method will clear all events
+调用此方法将清除所有事件
 
-**Example**
+**示例**
 
 ```js
 const emitter = new Emitter()
@@ -159,6 +159,6 @@ emitter.emit('foo', 'hi, Jack') // Not output
 emitter.emit('bar', 'hi, Tom') // Not output
 ```
 
-## License
+## 开源协议
 
 [MIT License](https://opensource.org/licenses/MIT)
